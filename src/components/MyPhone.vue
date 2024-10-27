@@ -1735,7 +1735,7 @@
         </div>
         
       </div>
-      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads"/>
+      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads" ref="myPhoneOS"/>
     </div>
     
   </div>
@@ -1743,6 +1743,8 @@
 
 <script>
 import MyPhoneOS from './MyPhoneOS.vue';
+
+
 
 
 export default {
@@ -1786,7 +1788,11 @@ export default {
     },
     normal_Startup() {
       if (this.isLoads) {
-        this.isOpen = !this.isOpen
+        this.isOpen = !this.isOpen;
+        // Викликаємо метод setUnlocked в MyPhoneOS при виконанні умови
+        if (this.isOpen && this.isLoads) {
+          this.$refs.myPhoneOS.setUnlocked(false);
+        }
       }
     },
     full_Launch() {
@@ -1829,7 +1835,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .phone__content {

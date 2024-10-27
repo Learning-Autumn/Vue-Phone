@@ -1,15 +1,22 @@
 <template>
   <div class="os__inner" v-if="isOpen && isLoads">
-    <MyLockScreen/>
+    <MyLockScreen v-if="!isUnlocked" :toggleUnlock="toggleUnlock" />
+    <MyWorkDesk v-else />
   </div>
 </template>
 
 <script>
 import MyLockScreen from './MyLockScreen.vue';
+import MyWorkDesk from './MyWorkDesk.vue';
 
 export default {
   components: {
-    MyLockScreen
+    MyLockScreen, MyWorkDesk
+  },
+  data() {
+    return {
+      isUnlocked: false,
+    }
   },
   props: {
     isOpen: {
@@ -21,6 +28,14 @@ export default {
       required: true,
     },
   },
+  methods: {
+    toggleUnlock() {
+      this.isUnlocked = !this.isUnlocked;
+    },
+    setUnlocked(value) {
+      this.isUnlocked = value;
+    }
+  }
 };
 </script>
 

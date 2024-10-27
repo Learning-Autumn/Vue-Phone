@@ -17,12 +17,15 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    box-sizing: border-box;
 }
 
 body {
   font-family: 'San-Francisco', sans-serif;
   font-weight: normal; 
   line-height:1;
+  user-select: none;
+  color: #fff;
 }
 
 article,aside,details,figcaption,figure,
