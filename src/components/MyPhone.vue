@@ -6,11 +6,16 @@
         <div class="">Start: {{ isStart }}</div>
         <div class="">Loads: {{ isLoads }}</div>
         <div class="">{{ isLoading }}</div>
-        <svg :class="['phone', isOpen ? 'isStart' : 'isOff']" width="360" height="730"
-          viewBox="0 0 95.25 193.14585" version="1.1" id="svg8" xml:space="preserve"
-          xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
-          xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-          xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <svg :class="['phone', isOpen ? 'isStart' : 'isOff']" width="360" height="730" viewBox="0 0 95.25 193.14585"
+          version="1.1" id="svg8" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#"
+          xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <defs>
+            <pattern id="myImage" patternUnits="userSpaceOnUse" width="100" height="200">
+              <image href="/images/wallpaper-2.jpg" x="0" y="0" width="100" height="200" />
+            </pattern>
+          </defs>
           <defs id="defs2">
             <linearGradient id="linearGradient4">
               <stop style="stop-color: #d3d3e8; stop-opacity: 1" offset="0" id="stop1" />
@@ -1600,14 +1605,14 @@
               stroke-dasharray: none;
               stroke-opacity: 1;
             " id="rect5" width="88.415161" height="188.62688" x="3.4174345" y="2.2590756" ry="13.938107" />
-          <rect class="phone__display" style="
-              fill: #333;
-              fill-opacity: 1;
-              stroke: none;
-              stroke-width: 3.82924;
-              stroke-dasharray: none;
-              stroke-opacity: 1;
-            " id="rect14" width="85.173004" height="184.47285" x="5.0384998" y="4.3364935" ry="12.160764" />
+          <rect class="phone__display" :style="{
+            fill: isStart ? '#000' : (isOpen && isLoads ? 'url(#myImage)' : '#333'),
+            fillOpacity: 1,
+            stroke: 'none',
+            strokeWidth: 3.82924,
+            strokeDasharray: 'none',
+            strokeOpacity: 1
+          }" id="rect14" width="85.173004" height="184.47285" x="5.0384998" y="4.3364935" ry="12.160764" />
           <path id="path14224" style="
               fill: url(#linearGradient26130);
               fill-opacity: 1;
@@ -1802,7 +1807,7 @@ export default {
         };
         loadStep();
       }
-      if(this.isLoads) {
+      if (this.isLoads) {
         this.isOpen = false;
         this.isLoads = false;
       }
@@ -1873,6 +1878,7 @@ export default {
 }
 
 .isStart .phone__display {
-  fill: #000 !important;
+  fill: #000;
+  transition: all 0.5s;
 }
 </style>
