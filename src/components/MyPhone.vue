@@ -2,9 +2,10 @@
   <div class="container">
     <div class="phone__inner">
       <div class="phone__content">
-        <div class="">Work: {{ isOpen }}</div>
-        <div class="">Start: {{ isStart }}</div>
-        <div class="">Loads: {{ isLoads }}</div>
+        <div class="log">Work: {{ isOpen }} Program: {{ isOpenProg }}</div>
+        <div class="log">Start: {{ isStart }}</div>
+        <div class="log">Loads: {{ isLoads }}</div>
+        <!-- <div class="">Program: {{ isOpenProg }}</div> -->
         <div class="">{{ isLoading }}</div>
         <svg :class="['phone', isOpen ? 'isStart' : 'isOff']" width="360" height="730" viewBox="0 0 95.25 193.14585"
           version="1.1" id="svg8" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -1465,7 +1466,8 @@
                 stroke-opacity: 1;
               "
               d="m 194.04212,58.442204 h 2.27465 c 0.12117,0 0.21872,0.09755 0.21872,0.218717 v 22.646555 c 0,0.121168 -0.0976,0.218715 -0.21872,0.218715 h -2.27465 c -0.12117,0 -0.21871,-0.09754 -0.21871,-0.218715 V 58.660921 c 0,-0.12117 0.0976,-0.218717 0.21871,-0.218717 z" />
-            <path id="rect2415-4-9-9" style="
+            <path class="buttonOn" id="rect2415-4-9-9" @mousedown="startPress" @mouseup="endPress"
+              @mouseleave="cancelPress" @touchstart="startPress" @touchend="endPress" @touchcancel="cancelPress" style="
                 display: inline;
                 fill: url(#linearGradient7);
                 fill-opacity: 1;
@@ -1492,7 +1494,7 @@
                   stroke-opacity: 1;
                 "
                 d="m 103.10856,53.429299 h 2.27465 c 0.12117,0 0.21872,0.09755 0.21872,0.218717 v 14.211987 c 0,0.121168 -0.0976,0.218715 -0.21872,0.218715 h -2.27465 c -0.12117,0 -0.21871,-0.09754 -0.21871,-0.218715 V 53.648016 c 0,-0.12117 0.0976,-0.218717 0.21871,-0.218717 z" />
-              <path id="rect2415-4-9-9-5" style="
+              <path @click="closeProgram" class="buttonOn" id="rect2415-4-9-9-5" style="
                   display: inline;
                   fill: url(#linearGradient1);
                   fill-opacity: 1;
@@ -1606,7 +1608,7 @@
               stroke-opacity: 1;
             " id="rect5" width="88.415161" height="188.62688" x="3.4174345" y="2.2590756" ry="13.938107" />
           <rect class="phone__display" :style="{
-            fill: isStart ? '#000' : (isOpen && isLoads ? 'url(#myImage)' : '#333'),
+            fill: isStart || isOpenProg ? '#000' : (isOpen && isLoads ? 'url(#myImage)' : '#333'),
             fillOpacity: 1,
             stroke: 'none',
             strokeWidth: 3.82924,
@@ -1727,17 +1729,17 @@
             </g>
           </g>
         </svg>
-        <div @mousedown="startPress" @mouseup="endPress" @mouseleave="cancelPress" @touchstart="startPress"
-          @touchend="endPress" @touchcancel="cancelPress" class="buttonOn"></div>
+        <!-- <div @mousedown="startPress" @mouseup="endPress" @mouseleave="cancelPress" @touchstart="startPress"
+          @touchend="endPress" @touchcancel="cancelPress" class="buttonOn"></div> -->
         <img class="phone__logo" v-if="isStart" width="60px" src="/images/apple.svg" alt="App" />
         <div class="phone__loading">
           <span :style="{ width: isLoading + 'px' }" class="phone__loading-step"></span>
         </div>
-        
+
       </div>
-      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads" ref="myPhoneOS"/>
+      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads" :isOpenProg="isOpenProg" ref="myPhoneOS" />
     </div>
-    
+
   </div>
 </template>
 
@@ -1754,10 +1756,16 @@ export default {
   props: {},
   data() {
     return {
-      isOpen: false,
+      isOpen: true, //false
       isStart: false,
-      isLoads: false,
+      isLoads: true, //false
+      isOpenProg: false,
       isLoading: 0,
+    };
+  },
+  provide() {
+    return {
+      startProgram: this.startProgram,
     };
   },
   methods: {
@@ -1826,11 +1834,22 @@ export default {
         this.isLoads = false;
       }
     },
+    closeProgram() {
+      this.isOpenProg = false;
+    },
+    startProgram() {
+      console.log('Start Program');
+      this.isOpenProg = true;
+    }
   },
 };
 </script>
 
 <style scoped>
+.log {
+  color: red;
+}
+
 .phone__inner {
   display: flex;
   justify-content: center;
@@ -1842,14 +1861,16 @@ export default {
 }
 
 .buttonOn {
-  width: 8px;
-  height: 85px;
+  cursor: pointer;
+  padding-right: 5px;
+  /* width: 8px;
+  height: 90px;
   background-color: transparent;
   position: absolute;
   right: 0;
-  top: 40%;
+  top: 42%;
   transform: translateY(-50%);
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 .phone__logo {
