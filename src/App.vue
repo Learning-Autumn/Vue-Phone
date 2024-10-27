@@ -1,16 +1,16 @@
 <template>
   <div class="app" id="app">
-    <AppCalculator />
+    <MyPhone />
   </div>
 </template>
 
 <script>
-import AppCalculator from "./components/MyPhone.vue";
+import MyPhone from "./components/MyPhone.vue";
 
 export default {
   name: "App",
   components: {
-    AppCalculator,
+    MyPhone,
   },
 };
 </script>

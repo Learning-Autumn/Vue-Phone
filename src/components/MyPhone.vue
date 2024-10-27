@@ -1733,13 +1733,21 @@
         <div class="phone__loading">
           <span :style="{ width: isLoading + 'px' }" class="phone__loading-step"></span>
         </div>
+        
       </div>
+      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads"/>
     </div>
+    
   </div>
 </template>
 
 <script>
+import MyPhoneOS from './MyPhoneOS.vue';
+
+
 export default {
+  components: { MyPhoneOS },
+
   // name: 'Calculator',
   props: {},
   data() {

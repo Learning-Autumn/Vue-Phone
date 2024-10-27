@@ -20,7 +20,9 @@ time, mark, audio, video {
 }
 
 body {
-    line-height:1;
+  font-family: 'San-Francisco', sans-serif;
+  font-weight: normal; 
+  line-height:1;
 }
 
 article,aside,details,figcaption,figure,
