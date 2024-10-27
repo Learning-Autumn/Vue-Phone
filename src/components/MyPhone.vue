@@ -4,17 +4,13 @@
       <div class="phone__content">
         <div class="">Work: {{ isOpen }}</div>
         <div class="">Start: {{ isStart }}</div>
+        <div class="">Loads: {{ isLoads }}</div>
         <div class="">{{ isLoading }}</div>
-        <svg :class="['phone', isLoading || isOpen ? 'isStart' : 'isOff']" width="360" height="730"
+        <svg :class="['phone', isOpen ? 'isStart' : 'isOff']" width="360" height="730"
           viewBox="0 0 95.25 193.14585" version="1.1" id="svg8" xml:space="preserve"
           xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
           xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
           xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
-          <defs>
-            <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="100" height="200">
-              <image href="/images/wallpaper.jpg" x="0" y="0" width="100" height="200" />
-            </pattern>
-          </defs>
           <defs id="defs2">
             <linearGradient id="linearGradient4">
               <stop style="stop-color: #d3d3e8; stop-opacity: 1" offset="0" id="stop1" />
@@ -1605,7 +1601,7 @@
               stroke-opacity: 1;
             " id="rect5" width="88.415161" height="188.62688" x="3.4174345" y="2.2590756" ry="13.938107" />
           <rect class="phone__display" style="
-              fill: url(#imgPattern);
+              fill: #333;
               fill-opacity: 1;
               stroke: none;
               stroke-width: 3.82924;
@@ -1726,7 +1722,8 @@
             </g>
           </g>
         </svg>
-        <div @click="toggleStart" class="buttonOn"></div>
+        <div @mousedown="startPress" @mouseup="endPress" @mouseleave="cancelPress" @touchstart="startPress"
+          @touchend="endPress" @touchcancel="cancelPress" class="buttonOn"></div>
         <img class="phone__logo" v-if="isStart" width="60px" src="/images/apple.svg" alt="App" />
         <div class="phone__loading">
           <span :style="{ width: isLoading + 'px' }" class="phone__loading-step"></span>
@@ -1744,13 +1741,45 @@ export default {
     return {
       isOpen: false,
       isStart: false,
+      isLoads: false,
       isLoading: 0,
     };
   },
   methods: {
-    toggleStart() {
-      if (!this.isStart) {
+    startPress() {
+      this.isLongPress = false;
+      // Запускаємо таймер на 3 секунди для довгого натискання
+      this.pressTimer = setTimeout(() => {
+        this.isLongPress = true;
+        this.handleLongPress();
+      }, 3000); // 3 секунди
+    },
+    endPress() {
+      if (!this.isLongPress) {
+        this.handleShortPress();
+      }
+      clearTimeout(this.pressTimer);
+    },
+    cancelPress() {
+      clearTimeout(this.pressTimer);
+    },
+    // Коротке натискання.
+    handleShortPress() {
+      this.normal_Startup();
+    },
+    // Довге натискання.
+    handleLongPress() {
+      this.full_Launch();
+    },
+    normal_Startup() {
+      if (this.isLoads) {
+        this.isOpen = !this.isOpen
+      }
+    },
+    full_Launch() {
+      if (!this.isOpen && !this.isStart) {
         this.isStart = true;
+        this.isOpen = true;
         this.isLoading = 1;
 
         const intervals = [10, 30, 50, 100, 120, 100, 50, 30, 10, 50];
@@ -1765,13 +1794,17 @@ export default {
           } else {
             this.isLoading = 0;
             setTimeout(() => {
+              this.isLoads = true;
               this.isOpen = true;
               this.isStart = false;
             }, 700);
           }
         };
-
         loadStep();
+      }
+      if(this.isLoads) {
+        this.isOpen = false;
+        this.isLoads = false;
       }
     },
   },
@@ -1784,7 +1817,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 }
 
 .phone__content {
