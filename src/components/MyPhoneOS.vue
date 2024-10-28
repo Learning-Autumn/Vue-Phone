@@ -1,7 +1,7 @@
 <template>
   <div class="os__inner" v-if="isOpen && isLoads">
-    <MyLockScreen v-if="!isUnlocked && !isOpenProg" :toggleUnlock="toggleUnlock" />
-    <MyWorkDesk v-else-if="!isOpenProg" />
+    <MyLockScreen v-if="!isUnlocked" :toggleUnlock="toggleUnlock" />
+    <MyWorkDesk v-else />
   </div>
 </template>
 
@@ -24,10 +24,6 @@ export default {
       required: true,
     },
     isLoads: {
-      type: Boolean,
-      required: true,
-    },
-    isOpenProg: {
       type: Boolean,
       required: true,
     },

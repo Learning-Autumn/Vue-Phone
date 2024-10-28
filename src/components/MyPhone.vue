@@ -2,7 +2,7 @@
   <div class="container">
     <div class="phone__inner">
       <div class="phone__content">
-        <div class="log">Work: {{ isOpen }} Program: {{ isOpenProg }}</div>
+        <div class="log">Work: {{ isOpen }} Program: {{ isOpenProgram }}</div>
         <div class="log">Start: {{ isStart }}</div>
         <div class="log">Loads: {{ isLoads }}</div>
         <!-- <div class="">Program: {{ isOpenProg }}</div> -->
@@ -1608,7 +1608,7 @@
               stroke-opacity: 1;
             " id="rect5" width="88.415161" height="188.62688" x="3.4174345" y="2.2590756" ry="13.938107" />
           <rect class="phone__display" :style="{
-            fill: isStart || isOpenProg ? '#000' : (isOpen && isLoads ? 'url(#myImage)' : '#333'),
+            fill: isStart || isOpenProgram ? '#000' : (isOpen && isLoads ? 'url(#myImage)' : '#333'),
             fillOpacity: 1,
             stroke: 'none',
             strokeWidth: 3.82924,
@@ -1737,7 +1737,7 @@
         </div>
 
       </div>
-      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads" :isOpenProg="isOpenProg" ref="myPhoneOS" />
+      <MyPhoneOS :isOpen="isOpen" :isLoads="isLoads" ref="myPhoneOS" />
     </div>
 
   </div>
@@ -1759,13 +1759,8 @@ export default {
       isOpen: true, //false
       isStart: false,
       isLoads: true, //false
-      isOpenProg: false,
+      isOpenProgram: '',
       isLoading: 0,
-    };
-  },
-  provide() {
-    return {
-      startProgram: this.startProgram,
     };
   },
   methods: {
@@ -1834,13 +1829,6 @@ export default {
         this.isLoads = false;
       }
     },
-    closeProgram() {
-      this.isOpenProg = false;
-    },
-    startProgram() {
-      console.log('Start Program');
-      this.isOpenProg = true;
-    }
   },
 };
 </script>
