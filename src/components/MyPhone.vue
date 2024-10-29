@@ -2442,9 +2442,9 @@ export default {
   props: {},
   data() {
     return {
-      isOpen: true, //false
+      isOpen: false, //false
       isStart: false,
-      isLoads: true, //false
+      isLoads: false, //false
       state: reactive({
         isOpenProgram: "",  // реактивний об’єкт для передачі в provide
       }),
@@ -2486,6 +2486,7 @@ export default {
     normal_Startup() {
       if (this.isLoads) {
         this.isOpen = !this.isOpen;
+        this.state.isOpenProgram = '';
         // Викликаємо метод setUnlocked в MyPhoneOS при виконанні умови
         if (this.isOpen && this.isLoads) {
           this.$refs.myPhoneOS.setUnlocked(false);
@@ -2494,6 +2495,7 @@ export default {
     },
     full_Launch() {
       if (!this.isOpen && !this.isStart) {
+        this.state.isOpenProgram = '';
         this.isStart = true;
         this.isOpen = true;
         this.isLoading = 1;

@@ -51,15 +51,20 @@
         </svg>
       </div>
       <div class="camera_interface-bottom">
-        <ul class="camera_interface-funcrions">
-          <li class="camera_interface-function">Пагрограф</li>
-          <li class="camera_interface-function">Відео</li>
-          <li class="camera_interface-function camera_interface-function--active">Фото</li>
-          <li class="camera_interface-function">Портрет</li>
-          <li class="camera_interface-function">Панорама</li>
-        </ul>
+        <MyCameraProgramSlider />
         <div class="camera_interface-control">
+          <svg class="camera_interface-control-svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 17H4M4 17L8 21M4 17L8 13M20 7H9M9 7L13 11M9 7L13 3" stroke="#fff" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           <div class="camera_interface-control-btn"></div>
+          <svg class="camera_interface-control-svg" fill="#fff" width="20px" height="20px" viewBox="0 0 32 32" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>arrows-rotate</title>
+            <path
+              d="M30.445 13.837c-0.085-0.616-0.608-1.085-1.24-1.085-0.691 0-1.251 0.56-1.251 1.251 0 0.056 0.004 0.112 0.011 0.166l-0.001-0.006c0.071 0.505 0.111 1.089 0.111 1.682 0 7.044-5.707 12.755-12.749 12.762h-0.001c-0.009 0-0.020 0-0.030 0-3.771 0-7.155-1.653-9.469-4.273l-0.012-0.014h4.582c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0h-7.071c-0.035 0-0.064 0.017-0.098 0.020-0.080 0.009-0.152 0.024-0.222 0.046l0.009-0.002c-0.099 0.023-0.185 0.055-0.266 0.095l0.007-0.003c-0.024 0.012-0.051 0.012-0.075 0.027-0.036 0.030-0.069 0.060-0.1 0.091l-0 0c-0.073 0.054-0.137 0.113-0.195 0.178l-0.001 0.001c-0.155 0.178-0.258 0.405-0.28 0.656l-0 0.004c-0.010 0.037-0.020 0.084-0.027 0.131l-0.001 0.006v7.072c0 0.69 0.56 1.25 1.25 1.25s1.25-0.56 1.25-1.25v0-3.471c2.736 2.741 6.518 4.436 10.697 4.436 0.019 0 0.037-0 0.056-0h-0.003c8.418-0.009 15.24-6.831 15.25-15.248v-0.001c-0-0.713-0.048-1.414-0.14-2.102l0.009 0.080zM3.12 19.393c0.059 0 0.117-0.004 0.173-0.012l-0.006 0.001c0.616-0.084 1.085-0.606 1.085-1.238 0-0.058-0.004-0.116-0.012-0.172l0.001 0.006c-0.072-0.507-0.112-1.093-0.112-1.689 0-7.043 5.708-12.752 12.75-12.755h0c0.009-0 0.019-0 0.029-0 3.771 0 7.156 1.653 9.469 4.274l0.012 0.014h-4.581c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25 1.25h7.072c0.030 0 0.056-0.015 0.085-0.017 0.179-0.024 0.342-0.071 0.492-0.14l-0.011 0.004c0.025-0.013 0.053-0.013 0.078-0.028 0.037-0.030 0.070-0.060 0.101-0.092l0-0c0.073-0.054 0.137-0.112 0.194-0.177l0.001-0.001c0.093-0.116 0.171-0.251 0.226-0.396l0.003-0.010c0.024-0.073 0.042-0.158 0.050-0.246l0-0.005c0.011-0.038 0.021-0.086 0.028-0.135l0.001-0.006v-7.071c0-0.69-0.56-1.25-1.25-1.25s-1.25 0.56-1.25 1.25v0 3.472c-2.736-2.742-6.52-4.439-10.699-4.439-0.018 0-0.036 0-0.055 0h0.003c-8.423 0.005-15.25 6.835-15.25 15.259 0 0.711 0.049 1.411 0.143 2.096l-0.009-0.079c0.085 0.614 0.606 1.083 1.237 1.084h0z">
+            </path>
+          </svg>
         </div>
       </div>
     </div>
@@ -67,7 +72,10 @@
 </template>
 
 <script>
+import MyCameraProgramSlider from './MyCameraProgramSlider.vue';
+
 export default {
+  components: { MyCameraProgramSlider },
   data() {
     return {
       stream: null,
@@ -166,7 +174,7 @@ export default {
 
 .camera_interface-bottom {
   padding: 15px 5px 3px;
-  height: 100px;
+  height: 115px;
   width: 334px;
   border-radius: 50px;
   border-top-left-radius: 0;
@@ -193,13 +201,50 @@ export default {
 
 .camera_interface-control {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px;
 }
 
+/* .camera_interface-control::before {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  top: -5px;
+} */
+
 .camera_interface-control-btn {
-  width: 49px;
-  height: 49px;
+  width: 44px;
+  height: 44px;
   background-color: #fff;
   border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+}
+
+
+.camera_interface-control-btn::before {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  top: -5px;
+  left: -5px
+}
+
+.camera_interface-control-svg {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 7px;
 }
 </style>
+
+
