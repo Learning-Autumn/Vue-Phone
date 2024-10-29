@@ -608,9 +608,6 @@
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><g
      id="g11"
      transform="translate(-101.52873,-0.08877711)"><path
-       id="rect2415-6-8"
-       style="display:inline;fill:#363c71;fill-opacity:1;stroke:none;stroke-width:1.0478;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 194.04212,58.442204 h 2.27465 c 0.12117,0 0.21872,0.09755 0.21872,0.218717 v 22.646555 c 0,0.121168 -0.0976,0.218715 -0.21872,0.218715 h -2.27465 c -0.12117,0 -0.21871,-0.09754 -0.21871,-0.218715 V 58.660921 c 0,-0.12117 0.0976,-0.218717 0.21871,-0.218717 z" /><path
        id="rect2415-4-9-9"
        style="display:inline;fill:url(#linearGradient7);fill-opacity:1;stroke:none;stroke-width:1.0478;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 194.04212,58.726535 h 2.27465 c 0.12117,0 0.21872,0.09755 0.21872,0.218716 v 22.165377 c 0,0.12117 -0.0976,0.218717 -0.21872,0.218717 h -2.27465 c -0.12117,0 -0.21871,-0.09755 -0.21871,-0.218717 V 58.945251 c 0,-0.121168 0.0976,-0.218716 0.21871,-0.218716 z" /><g
@@ -676,7 +673,9 @@
      ry="12.160764" /><path
      id="path14224"
      style="fill:url(#linearGradient26130);fill-opacity:1;stroke:none;stroke-width:0.23806px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 38.389262,1.2688569 c 0.94592,0 0.92146,0.194724 1.11731,0.415675 0.14284,0.161153 0.32685,0.212488 0.68907,0.212488 h 14.85877 c 0.36222,0 0.54576,-0.05133 0.68861,-0.212488 0.19585,-0.220951 0.17184,-0.415675 1.11776,-0.415675 z" /><g
+     d="m 38.389262,1.2688569 c 0.94592,0 0.92146,0.194724 1.11731,0.415675 0.14284,0.161153 0.32685,0.212488 0.68907,0.212488 h 14.85877 c 0.36222,0 0.54576,-0.05133 0.68861,-0.212488 0.19585,-0.220951 0.17184,-0.415675 1.11776,-0.415675 z" />
+     
+     <g
      id="g2"
      transform="matrix(0.95270798,0,0,0.95270798,-94.556188,0.50887389)"><rect
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;stop-color:#000000"

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="phone__inner">
       <div class="phone__content">
-        <div class="log">Work: {{ isOpen }} Program: {{ isOpenProgram }}</div>
+        <div class="log">Work: {{ isOpen }} Program: {{ state.isOpenProgram }}</div>
         <div class="log">Start: {{ isStart }}</div>
         <div class="log">Loads: {{ isLoads }}</div>
         <!-- <div class="">Program: {{ isOpenProg }}</div> -->
@@ -2243,7 +2243,7 @@
             class="phone__display"
             :style="{
               fill:
-                isStart || isOpenProgram
+                isStart || state.isOpenProgram
                   ? '#000'
                   : isOpen && isLoads
                   ? 'url(#myImage)'
@@ -2433,6 +2433,7 @@
 
 <script>
 import MyPhoneOS from "./MyPhoneOS.vue";
+import { reactive } from "vue";
 
 export default {
   components: { MyPhoneOS },
@@ -2444,12 +2445,15 @@ export default {
       isOpen: true, //false
       isStart: false,
       isLoads: true, //false
-      isOpenProgram: "",
+      state: reactive({
+        isOpenProgram: "",  // реактивний об’єкт для передачі в provide
+      }),
       isLoading: 0,
     };
   },
   provide() {
     return {
+      state: this.state,
       setProgram: this.setProgram
     };
   },
@@ -2520,10 +2524,10 @@ export default {
       }
     },
     setProgram(programName) {
-      this.isOpenProgram = programName;
+      this.state.isOpenProgram = programName;
     },
-    closeProgram(){
-      this.isOpenProgram = '';
+    closeProgram() {
+      this.state.isOpenProgram = '';
     },
   },
 };
