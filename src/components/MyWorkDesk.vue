@@ -40,7 +40,8 @@ export default {
   left: 0;
   top: 0;
   padding: 12px 20px;
-  align-items: center
+  align-items: center;
+  z-index: 1000;
 }
 .work__desk-photo {
   position: absolute;
