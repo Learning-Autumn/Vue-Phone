@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg @click="openCameraApp" class="work__desk-app" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="65px" height="65px">
+    <svg @click="openApp" class="work__desk-app" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="65px" height="65px">
       <path fill="#e0e0e0"
         d="M35.13 42H19V30C19 30 35.48 42 35.13 42zM6.3 10.87c.1-.33.22-.65.38-.96C7.36 8.46 8.54 7.3 10 6.64 10.149 6.565 11 13 11 13S6.193 11.207 6.3 10.87z" />
       <path fill="#7cb342" d="M18 6H20V23H18z" />
@@ -45,7 +45,7 @@
 export default {
   inject: ['setProgram'],
   methods: {
-    openCameraApp() {
+    openApp() {
       this.setProgram('MapApp');
     }
   }

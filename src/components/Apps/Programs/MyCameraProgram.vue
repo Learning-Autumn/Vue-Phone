@@ -1,10 +1,10 @@
 <template>
-  <div class="camera_program">
-    <video class="camera_program-video" ref="video" width="330" height="480" autoplay />
-    <div class="camera_program-interface">
-      <div class="camera_interface-top">
-        <div class="camera_interface-top--left">
-          <div class="camera_interface-left--content">
+  <div class="camera__program">
+    <video class="camera__program-video" ref="video" width="330" height="480" autoplay />
+    <div class="camera__program-interface">
+      <div class="camera__interface-top">
+        <div class="camera__interface-top--left">
+          <div class="camera__interface-left--content">
             <svg fill="#fff" width="18px" height="18px" viewBox="0 0 24 24" id="lightning" data-name="Flat Color"
               xmlns="http://www.w3.org/2000/svg" class="camera_interface-left--svg icon flat-color">
               <path id="primary"
@@ -12,7 +12,7 @@
                 style="fill: rgb(255, 255, 255);"></path>
             </svg>
           </div>
-          <div class="camera_interface-left--content">
+          <div class="camera__interface-left--content">
             <svg class="camera_interface-left--svg" fill="#fff" height="12px" width="12px" version="1.1" id="Layer_1"
               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
               xml:space="preserve">
@@ -28,8 +28,8 @@
             </svg>
           </div>
         </div>
-        <div class="camera_interface-center--content">
-          <svg class="camera_interface-top--svg" width="16px" height="16px" viewBox="0 -4.5 20 20" version="1.1"
+        <div class="camera__interface-center--content">
+          <svg class="camera__interface-top--svg" width="16px" height="16px" viewBox="0 -4.5 20 20" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -6683.000000)" fill="#fff">
@@ -50,15 +50,15 @@
             stroke="#fff" stroke-width="2" stroke-linecap="round" />
         </svg>
       </div>
-      <div class="camera_interface-bottom">
+      <div class="camera__interface-bottom">
         <MyCameraProgramSlider />
-        <div class="camera_interface-control">
-          <svg class="camera_interface-control-svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="camera__interface-control">
+          <svg class="camera__interface-control-svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 17H4M4 17L8 21M4 17L8 13M20 7H9M9 7L13 11M9 7L13 3" stroke="#fff" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <div class="camera_interface-control-btn"></div>
-          <svg class="camera_interface-control-svg" fill="#fff" width="20px" height="20px" viewBox="0 0 32 32" version="1.1"
+          <div class="camera__interface-control-btn"></div>
+          <svg class="camera__interface-control-svg" fill="#fff" width="20px" height="20px" viewBox="0 0 32 32" version="1.1"
             xmlns="http://www.w3.org/2000/svg">
             <title>arrows-rotate</title>
             <path
@@ -107,7 +107,7 @@ export default {
 </script>
 
 <style scoped>
-.camera_program-video {
+.camera__program-video {
   width: 335px;
   height: 705px;
   border-radius: 50px;
@@ -115,7 +115,7 @@ export default {
   margin-top: 5px;
 }
 
-.camera_program-interface {
+.camera__program-interface {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -128,7 +128,7 @@ export default {
   right: 0;
 }
 
-.camera_interface-top {
+.camera__interface-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,7 +145,7 @@ export default {
 
 .camera_interface-top--svg {}
 
-.camera_interface-left--content {
+.camera__interface-left--content {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -155,13 +155,13 @@ export default {
   align-items: center
 }
 
-.camera_interface-top--left {
+.camera__interface-top--left {
   align-items: center;
   display: flex;
   gap: 10px;
 }
 
-.camera_interface-center--content {
+.camera__interface-center--content {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   width: 24px;
@@ -172,7 +172,7 @@ export default {
   transform: translateX(-50%);
 }
 
-.camera_interface-bottom {
+.camera__interface-bottom {
   padding: 15px 5px 3px;
   height: 115px;
   width: 334px;
@@ -182,7 +182,7 @@ export default {
   background-color: rgba(000, 000, 000, 0.8);
 }
 
-.camera_interface-funcrions {
+.camera__interface-funcrions {
   display: flex;
   justify-content: space-between;
   list-style: none;
@@ -190,16 +190,16 @@ export default {
   margin-bottom: 5px;
 }
 
-.camera_interface-function {
+.camera__interface-function {
   text-transform: uppercase;
   font-size: 12px;
 }
 
-.camera_interface-function--active {
+.camera__interface-function--active {
   color: #dacd3a;
 }
 
-.camera_interface-control {
+.camera__interface-control {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -217,7 +217,7 @@ export default {
   top: -5px;
 } */
 
-.camera_interface-control-btn {
+.camera__interface-control-btn {
   width: 44px;
   height: 44px;
   background-color: #fff;
@@ -228,7 +228,7 @@ export default {
 }
 
 
-.camera_interface-control-btn::before {
+.camera__interface-control-btn::before {
   content: '';
   position: absolute;
   width: 48px;
@@ -240,7 +240,7 @@ export default {
   left: -5px
 }
 
-.camera_interface-control-svg {
+.camera__interface-control-svg {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   padding: 7px;

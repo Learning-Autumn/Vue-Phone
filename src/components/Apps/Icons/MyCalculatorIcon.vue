@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="65px" height="65px">
+    <svg @click="openApp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="65px" height="65px">
       <path fill="#cfd8dc"
         d="M42,37c0,2.762-2.238,5-5,5H11c-2.762,0-5-2.238-5-5V11c0-2.762,2.238-5,5-5h26c2.762,0,5,2.238,5,5	V37z" />
       <path fill="#1f212b"
@@ -22,8 +22,13 @@
 
 <script>
 export default {
-
-}
+  inject: ['setProgram'],
+  methods: {
+    openApp() {
+      this.setProgram('CalculatorApp');
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>
