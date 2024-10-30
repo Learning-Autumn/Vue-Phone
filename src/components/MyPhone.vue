@@ -2442,9 +2442,9 @@ export default {
   props: {},
   data() {
     return {
-      isOpen: false, //false
+      isOpen: true, //false
       isStart: false,
-      isLoads: false, //false
+      isLoads: true, //false
       state: reactive({
         isOpenProgram: "",  // реактивний об’єкт для передачі в provide
       }),
