@@ -107,6 +107,7 @@ export default {
   width: 130px;
   border-radius: 15px;
   padding: 12px;
+  cursor: pointer;
 }
 
 .work__desk-bottom {

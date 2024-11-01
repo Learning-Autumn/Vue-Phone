@@ -1,5 +1,5 @@
 <template>
-  <div class="work__desp-widget--weather">
+  <div @click="openApp" class="work__desp-widget--weather">
     <p class="work__widget-local">Київ</p>
     <p class="work__widget-temper">11°</p>
     <p class="work__widget-status">Сонячно</p>
@@ -9,7 +9,12 @@
 
 <script>
 export default {
-
+  inject: ['setProgram'],
+  methods: {
+    openApp() {
+      this.setProgram('WeatherWidgets');
+    }
+  }
 }
 </script>
 
