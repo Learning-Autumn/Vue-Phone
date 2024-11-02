@@ -3,9 +3,9 @@
     <div class="work__desk-inner">
       <div class="work__desk-top">
         <div class="work__desk-time">
-          10:59
+          {{ currentTimeData.currentTime }}
         </div>
-        <img class="work__desk-photo" src="/images/phone.png" alt="">
+        <img class="work__desk-photo" src="/images/phone.png" alt="" />
         <MyStatusPhone />
       </div>
       <MyWorkDeskApps v-if="!isOpenProgram" />
@@ -14,21 +14,20 @@
   </div>
 </template>
 
-
 <script>
-import MyStatusPhone from './MyStatusPhone.vue';
-import MyWorkDeskApps from './MyWorkDeskApps.vue';
-import MyWorkDeskProgram from './MyWorkDeskProgram.vue';
+import MyStatusPhone from "./MyStatusPhone.vue";
+import MyWorkDeskApps from "./MyWorkDeskApps.vue";
+import MyWorkDeskProgram from "./MyWorkDeskProgram.vue";
 
 export default {
   components: { MyStatusPhone, MyWorkDeskApps, MyWorkDeskProgram },
-  inject: ['state'],
+  inject: ["state", "currentTimeData"],
   computed: {
     isOpenProgram() {
-      return this.state.isOpenProgram;  // доступ до isOpenProgram через state
-    }
+      return this.state.isOpenProgram; // доступ до isOpenProgram через state
+    },
   },
-}
+};
 </script>
 
 <style scoped>

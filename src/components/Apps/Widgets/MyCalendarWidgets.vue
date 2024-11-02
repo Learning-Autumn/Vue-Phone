@@ -1,14 +1,14 @@
 <template>
   <div class="work__desp-widget--calendar">
-    <p class="work__widget-days">неділя</p>
-    <p class="work__widget-day">27</p>
+    <p class="work__widget-days">{{ currentTimeData.dayName }}</p>
+    <p class="work__widget-day">{{ currentTimeData.dayNumber }}</p>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  inject: ["currentTimeData"],
+};
 </script>
 
 <style scoped>
@@ -22,8 +22,6 @@ export default {
 .work__widget-day {
   font-size: 25px;
 }
-
-
 
 .work__desp-widget--calendar {
   background: rgb(0, 0, 0);

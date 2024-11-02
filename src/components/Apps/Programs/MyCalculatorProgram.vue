@@ -1,7 +1,7 @@
 <template>
   <div class="calculator__program">
     <svg
-      @click="toggleShowHistory"
+      @click="showHistory = !showHistory "
       class="calculator__program-history"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -108,8 +108,8 @@
         <ul v-if="this.showHistory" class="calculator__history-list">
           <li
             class="calculator__history-item"
-            v-for="hist in this.historyOperation"
-            v-bind:key="hist"
+            v-for="(hist, i) in this.historyOperation"
+            v-bind:key="i"
           >
             {{ hist[0] }} {{ hist[1] }} {{ hist[2] }} = {{ hist[3] }}
           </li>
@@ -416,10 +416,7 @@ export default {
       } else {
         this.nextNumber = -Number(this.nextNumber);
       }
-    },
-    toggleShowHistory() {
-      this.showHistory = !this.showHistory
-    }
+    },  
   },
 };
 </script>
