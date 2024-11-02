@@ -54,7 +54,7 @@ export default {
       this.currentDate = now;
 
       // Оновлюємо номер і назву дня
-      currentTimeData.dayNumber = now.getDay(); // Номер дня (0-6, де 0 - неділя)
+      currentTimeData.dayNumber = now.getDate(); // Номер дня (0-6, де 0 - неділя)
       const days = [
         "Неділя",
         "Понеділок",
