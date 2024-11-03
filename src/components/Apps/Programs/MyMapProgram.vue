@@ -1,5 +1,5 @@
 <template>
-  <div class="map__program" id="map" style="height: 708px; width: 332px" ></div>
+  <div class="map__program" id="map" style="height: 700px; width: 328px" ></div>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
     };
   },
   mounted() {
-    this.map = L.map('map').setView([50.4501, 30.5234], 13); 
+    this.map = L.map('map', { zoomControl: false }).setView([50.4501, 30.5234], 13); 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,

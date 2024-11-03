@@ -3,7 +3,7 @@
     <MyCameraProgram v-if="state.isOpenProgram === 'CameraApp'" />
     <MyMapProgram v-if="state.isOpenProgram === 'MapApp'" />
     <MyCalculatorProgram v-if="state.isOpenProgram === 'CalculatorApp'" />
-    <MyWeatherProgram v-if="state.isOpenProgram === 'MyWeatherProgram'" />
+    <MyWeatherProgram v-if="state.isOpenProgram === 'WeatherWidgets'" />
   </div>
 </template>
 

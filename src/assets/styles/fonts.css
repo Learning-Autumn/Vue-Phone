@@ -1,5 +1,12 @@
 @font-face {
   font-family: 'San-Francisco';
+  src: url('@/assets/fonts/sf-light.OTF') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'San-Francisco';
   src: url('@/assets/fonts/sf-regular.OTF') format('opentype');
   font-weight: normal;
   font-style: normal;
