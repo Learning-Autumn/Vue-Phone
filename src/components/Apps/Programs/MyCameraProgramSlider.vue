@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .slider-container {
   width: 300px;
   margin: 0 auto 18px; 
