@@ -19,7 +19,7 @@
           <li v-for="(day, index) in nextSixDays" :key="index" class="weather__info-item">
             <div class="weather__info-item-day">{{ day }}</div>
 
-            <div class="weather__info-item-icon">☁️</div>
+            <div class="weather__info-item-icon">{{ weatherData[index].weatherEmoji }}</div>
             <div class="weather__info-item-tempera">
               {{ weatherData[index]?.avgTemperature }}°
             </div>
@@ -78,7 +78,7 @@
         </p>
         <hr class="weather__section-line" />
         <ul class="weather__detail-list">
-          <MyWeatherProgramSlider />
+          <MyWeatherProgramSlider :weatherData="weatherData" />
         </ul>
       </div>
     </div>
@@ -177,6 +177,37 @@ export default {
       weatherData: [],
       locationCity: "Kyiv",
       isLoading: true,
+      daysOfWeek: ["Нд.", "Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб."],
+      weatherEmojis: {
+        0: '☀️', 
+        1: '🌤️', 
+        2: '🌤️', 
+        3: '☁️', 
+        45: '🌫️', 
+        48: '🌫️', 
+        51: '🌦️', 
+        53: '🌦️', 
+        55: '🌧️', 
+        56: '🌧️', 
+        57: '🌧️', 
+        61: '🌧️', 
+        63: '🌧️', 
+        65: '🌧️', 
+        66: '🌧️',
+        67: '🌧️', 
+        71: '❄️', 
+        73: '❄️', 
+        75: '❄️', 
+        77: '❄️', 
+        80: '🌧️', 
+        81: '🌧️',
+        82: '🌧️',
+        85: '❄️', 
+        86: '❄️', 
+        95: '🌩️', 
+        96: '🌩️', 
+        99: '🌩️', 
+      },
     };
   },
   created() {
@@ -186,11 +217,12 @@ export default {
     fetchWeatherData() {
       const today = new Date();
       const startDate = today.toISOString().split("T")[0];
-      const endDate = new Date(today.setDate(today.getDate() + 5))
+      const monthNum = today.getMonth() + 1;
+      const endDate = new Date(today.setDate(today.getDate() + 9))
         .toISOString()
         .split("T")[0];
 
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=50.45&longitude=30.52&daily=temperature_2m_max,temperature_2m_min&timezone=Europe/Kiev&start_date=${startDate}&end_date=${endDate}`;
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=50.45&longitude=30.52&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe/Kiev&start_date=${startDate}&end_date=${endDate}`;
 
       fetch(url)
         .then((response) => {
@@ -202,8 +234,31 @@ export default {
             const maxTemp = data.daily.temperature_2m_max[index];
             const minTemp = data.daily.temperature_2m_min[index];
             const avgTemp = ((maxTemp + minTemp) / 2).toFixed(1);
+            const weatherCode = data.daily.weathercode[index];
+            console.log(weatherCode);
+
+
+            const graphWidhtTmp = (((maxTemp - minTemp) / 15) * 100);
+
+            const graphMargin = (100 / Math.abs(maxTemp / minTemp));
+
+            let graphWidht = graphWidhtTmp < 100 ? graphWidhtTmp : 100;
+            // console.log(graphWidht);
+
+
+            const day = new Date();
+            day.setDate(day.getDate() + index);
+            const dayName = this.daysOfWeek[day.getDay()];
+            const dayNumber = day.getDate();
+
             return {
               date,
+              dayName,
+              graphWidht,
+              graphMargin,
+              monthNum,
+              dayNumber,
+              weatherEmoji: this.weatherEmojis[weatherCode],
               avgTemperature: avgTemp,
               minTemperature: minTemp,
               maxTemperature: maxTemp,
@@ -329,51 +384,6 @@ export default {
   align-items: center;
 }
 
-/* Slider CSS */
-.weather__detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.weather__detail-nameDay {
-  width: 45px;
-}
-
-.weather__detail-graph {
-  display: flex;
-  align-items: center;
-  width: 150px;
-}
-
-.weather__detail-graph--box {
-  width: 70px;
-  height: 4px;
-  position: relative;
-  margin: 0 20px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-}
-
-.weather__detail-graph--min {
-  color: rgb(42, 35, 35);
-}
-
-.weather__detail-icon,
-.weather__info-item-icon {
-  font-size: 25px;
-}
-
-.weather__detail-graph--line {
-  height: 4px;
-  border-radius: 5px;
-  background: rgb(67, 218, 255);
-  background: linear-gradient(90deg,
-      rgba(67, 218, 255, 1) 0%,
-      rgba(160, 255, 149, 1) 100%);
-}
-
 
 .weather__program-loading {
   display: flex;
@@ -382,21 +392,4 @@ export default {
   justify-content: center;
 }
 
-/* <div class="weather__detail">
-      <p class="weather__detail-text">
-        10-DAY FORECAST
-      </p>
-      <hr>
-      <ul class="weather__detail-list">
-        <li class="weather__detail-item">
-          <p class="weather__detail-nameDay">Today</p>
-          <p class="weather__detail-img">SVG</p>
-          <div class="weather__detail-graph">
-            <p class="weather__detail-graph--min">8°</p>
-            <div class="weather__detail-graph--line"></div>
-            <p class="weather__detail-graph--max">14°</p>
-          </div>
-        </li>
-      </ul>
-    </div> */
 </style>

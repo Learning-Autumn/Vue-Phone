@@ -23,26 +23,26 @@
       :dots="false"
       :arrows="false"
       :slidesToShow="3"
-      :slidesToScroll="1"
+      :slidesToScroll="2"
       :vertical="true"
       :infinite="false"
       :verticalSwiping="true"
       class="horizontal-slider"
     >
       <li
-        v-for="(item, index) in functions"
+        v-for="(item, index) in weatherData"
         :key="index"
         class="weather__detail-item"
         @click="setActive(index)"
       >
-        <p class="weather__detail-nameDay">{{ item.dayName }}</p>
-        <p class="weather__detail-icon">{{ item.weatherIcon }}</p>
+        <p class="weather__detail-nameDay">{{ item.dayName }} <span class="weather__detail-nameDay--detail">({{ item.dayNumber }}.{{ item.monthNum }})</span></p>
+        <p class="weather__detail-icon">{{ item.weatherEmoji }}</p>
         <div class="weather__detail-graph">
           <p class="weather__detail-graph--min">{{ item.minTemperature }}°</p>
           <div class="weather__detail-graph--box">
             <div
               class="weather__detail-graph--line"
-              style="width: 30px; margin-left: 30px"
+              :style="{ width: item.graphWidht + '%', 'margin-left': item.graphMargin + '%' }"
             ></div>
           </div>
           <p class="weather__detail-graph--max">{{ item.maxTemperature }}°</p>
@@ -77,53 +77,11 @@ import "vue-slick-carousel/dist/vue-slick-carousel.css";
 
 export default {
   components: { VueSlickCarousel },
-  data() {
-    return {
-      functions: [
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-        {
-          dayName: "Today",
-          weatherIcon: "☁️",
-          minTemperature: 8,
-          maxTemperature: 14,
-        },
-      ],
-    };
+  props: {
+    weatherData: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     setActive(index) {
@@ -153,22 +111,33 @@ export default {
 }
 
 .weather__detail-nameDay {
-  width: 45px;
+  width: 75px;
+  font-weight: 700; 
+}
+
+.weather__detail-nameDay--detail {
+  margin-left: 3px;
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .weather__detail-graph {
   display: flex;
   align-items: center;
-  width: 150px;
 }
 
 .weather__detail-graph--box {
-  width: 70px;
+  min-width: 70px;
   height: 4px;
   position: relative;
-  margin: 0 20px;
+  margin: 0 10px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 5px;
+}
+
+.weather__detail-graph--min,
+.weather__detail-graph--max {
+  width: 30px;
 }
 
 .weather__detail-graph--min {
@@ -178,6 +147,10 @@ export default {
 .weather__detail-icon,
 .weather__info-item-icon {
   font-size: 25px;
+}
+
+.weather__detail-icon {
+  margin: 0 5px;
 }
 
 .weather__detail-graph--line {

@@ -1,9 +1,9 @@
 <template>
   <div @click="openApp" class="work__desp-widget--weather">
     <p class="work__widget-local">Київ</p>
-    <p class="work__widget-temper">{{weatherData[0].avgTemperature}}°</p>
+    <p class="work__widget-temper">{{weatherData[0]?.avgTemperature}}°</p>
     <p class="work__widget-status">Сонячно</p>
-    <p class="work__widget-desp">B:{{weatherData[0].maxTemperature}}° H:{{weatherData[0].minTemperature}}°</p>
+    <p class="work__widget-desp">B:{{weatherData[0]?.maxTemperature}}° H:{{weatherData[0]?.minTemperature}}°</p>
   </div>
 </template>
 

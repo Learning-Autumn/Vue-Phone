@@ -59,7 +59,7 @@
 <script>
 import MyActiveIcon from './Apps/Icons/MyActiveIcon.vue';
 import MyAppStoreIcon from './Apps/Icons/MyAppStoreIcon.vue';
-import MyBookIcon from './Apps/Icons/MyBookIcon.vue';
+import MyBookIcon from './Apps/Icons/MyPinPong.vue';
 import MyCalculatorIcon from './Apps/Icons/MyCalculatorIcon.vue';
 import MyCalendarIcon from './Apps/Icons/MyCalendarIcon.vue';
 import MyCameraIcon from './Apps/Icons/MyCameraIcon.vue';
@@ -126,5 +126,8 @@ export default {
 
 .work__desk-app {
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 </style>

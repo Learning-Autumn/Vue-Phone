@@ -136,6 +136,7 @@
       </div>
       <div class="calculator__program-controls">
         <button
+          @dblclick="clearHistory"
           @click="clearNumber"
           class="calculator__program-control-btn calculator__program-control-btn--gray"
           type=""
@@ -361,8 +362,6 @@ export default {
   methods: {
     enteringNumbers(event) {
       let numberPressed = event.target.innerText;
-      console.log();
-
       if (!this.isOperation) {
         this.resultNumber += numberPressed;
       } else {
@@ -376,6 +375,9 @@ export default {
       this.resultNumber = "";
       this.nextNumber = "";
       this.isOperation = "";
+    },
+    clearHistory() {
+      this.historyOperation = []
     },
     calcInterest(numOne, numTwo) {
       return (numOne / numTwo) * 100;
@@ -398,13 +400,17 @@ export default {
             Number(this.resultNumber),
             Number(this.nextNumber)
           );
+          let decimals = 3;
+          let factor = Math.pow(10, decimals);
+          let roundedNum = Math.round(resultNumber * factor) / factor;
+
           this.historyOperation.push([
             this.resultNumber,
             this.isOperation,
             this.nextNumber,
-            resultNumber,
+            roundedNum,
           ]);
-          this.resultNumber = resultNumber;
+          this.resultNumber = roundedNum;
         }
         this.isOperation = "";
         this.nextNumber = "";
