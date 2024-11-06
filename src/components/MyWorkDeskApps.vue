@@ -63,7 +63,7 @@ import MyBookIcon from './Apps/Icons/MyPinPongIcon.vue';
 import MyCalculatorIcon from './Apps/Icons/MyCalculatorIcon.vue';
 import MyCalendarIcon from './Apps/Icons/MyCalendarIcon.vue';
 import MyCameraIcon from './Apps/Icons/MyCameraIcon.vue';
-import MyChatsIcon from './Apps/Icons/MyChatsIcon.vue';
+import MyChatsIcon from './Apps/Icons/MyOclockIcon.vue';
 import MyContactsIcon from './Apps/Icons/MyContactsIcon.vue';
 import MyFaceTimeIcon from './Apps/Icons/MyFaceTimeIcon.vue';
 import MyGalleryIcon from './Apps/Icons/MyGalleryIcon.vue';

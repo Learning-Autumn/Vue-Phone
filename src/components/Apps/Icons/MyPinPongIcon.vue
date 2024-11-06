@@ -28,7 +28,7 @@ export default {
   inject: ['setProgram'],
   methods: {
     openApp() {
-      this.setProgram('PinPong');
+      this.setProgram('PinPongApp');
     }
   }
 };
