@@ -24,7 +24,7 @@ export default {
   inject: ["state", "currentTimeData"],
   computed: {
     isOpenProgram() {
-      return this.state.isOpenProgram; // доступ до isOpenProgram через state
+      return this.state.isOpenProgram;
     },
   },
 };
