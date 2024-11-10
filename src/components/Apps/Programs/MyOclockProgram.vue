@@ -2,37 +2,17 @@
   <div class="oclock__program">
     <div v-if="currentMenu === 'WorldClock'" class="world__oclock">
       <MyOclockControl class="oclock__program-control" />
-      <h2 class="oclock__program-title">
-        World Clock
-      </h2>
-      <ul class="world__oclock-list">
-        <li class="world__oclock-item">
-          <div class="world__oclock-item-left">
-            <p class="world__oclock-top">Today, +0HRS</p>
-            <p class="world__oclock-bottom">Kyiv</p>
-          </div>
-          <div class="world__oclock-item-right">
-            <p class="world__oclock-time">23:30</p>
-          </div>
-        </li>
-      </ul>
+      <MyOclockOclockProgram/>
     </div>
     <div v-else-if="currentMenu === 'Alarms'" class="world__oclock">
       <MyOclockControl class="oclock__program-control" />
-      <h2 class="oclock__program-title">
-        Alarms
-      </h2>
-      <ul class="world__oclock-list">
-        <li class="world__oclock-item">
-          <div class="world__oclock-item-left">
-            <p class="world__oclock-top">Today, +0HRS</p>
-            <p class="world__oclock-bottom">Kyiv</p>
-          </div>
-          <div class="world__oclock-item-right">
-            <p class="world__oclock-time">23:30</p>
-          </div>
-        </li>
-      </ul>
+      <MyOclockAlarmsProgram/>
+    </div>
+    <div v-else-if="currentMenu === 'Stopwatch'" class="world__oclock">
+      <MyOclockStopwatchProgram/>
+    </div>
+    <div v-else-if="currentMenu === 'Timers'" class="world__oclock">
+      <MyOclockTimersProgram/>
     </div>
     <MyOclockMenu class="oclock__program-menu" :isOpenMenu="currentMenu" @updateMenu="updateCurrentMenu"/>
   </div>
@@ -41,8 +21,13 @@
 <script>
 import MyOclockControl from './PartsProgram/Oclock/MyOclockControl.vue';
 import MyOclockMenu from './PartsProgram/Oclock/MyOclockMenu.vue';
+import MyOclockAlarmsProgram from './PartsProgram/Oclock/MyOclockAlarmsProgram.vue';
+import MyOclockOclockProgram from './PartsProgram/Oclock/MyOclockOclockProgram.vue';
+import MyOclockStopwatchProgram from './PartsProgram/Oclock/MyOclockStopwatchProgram.vue';
+import MyOclockTimersProgram from './PartsProgram/Oclock/MyOclockTimersProgram.vue';
+
 export default {
-  components: { MyOclockControl, MyOclockMenu },
+  components: { MyOclockControl, MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
   data() {
     return {
       currentMenu: "WorldClock"
@@ -67,39 +52,6 @@ export default {
   margin-bottom: 10px;
 }
 
-.oclock__program-title {
-  font-size: 26px;
-  margin-bottom: 20px;
-}
-
-.world__oclock-list {
-  list-style: none;
-}
-
-.world__oclock-item {
-  display: flex;
-  padding: 20px 0;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(132, 132, 132, 0.3);
-  border-bottom: 1px solid rgba(132, 132, 132, 0.3);
-}
-
-.world__oclock-top {
-  font-size: 14px;
-  color: #848484;
-  margin-bottom: 5px;
-}
-
-.world__oclock-bottom {
-  font-size: 26px;
-  font-weight: 300;
-}
-
-.world__oclock-time {
-  font-size: 50px;
-  font-weight: 300;
-}
 
 .oclock__program-menu {
   position: absolute;
@@ -107,4 +59,10 @@ export default {
   right: 0;
   bottom: 20px;
 }
+
+.world__oclock {
+  height: 550px;
+  overflow: hidden;
+}
+
 </style>
