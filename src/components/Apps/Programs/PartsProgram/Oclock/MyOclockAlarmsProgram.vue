@@ -1,5 +1,6 @@
 <template>
   <div class="oclock__alarms">
+    <MyOclockControl :parentId="'AlarmsOclock'" />
     <h2 class="oclock__program-title">
       Alarms
     </h2>
@@ -35,9 +36,10 @@
 
 <script>
 import MyOclockAlarmsItem from './MyOclockAlarmsItem.vue';
+import MyOclockControl from '../Oclock/MyOclockControl.vue';
 
 export default {
-  components: { MyOclockAlarmsItem }
+  components: { MyOclockAlarmsItem, MyOclockControl }
 }
 </script>
 

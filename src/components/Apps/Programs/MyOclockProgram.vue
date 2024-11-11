@@ -1,11 +1,10 @@
 <template>
   <div class="oclock__program">
     <div v-if="currentMenu === 'WorldClock'" class="world__oclock">
-      <MyOclockControl class="oclock__program-control" />
       <MyOclockOclockProgram/>
     </div>
     <div v-else-if="currentMenu === 'Alarms'" class="world__oclock">
-      <MyOclockControl class="oclock__program-control" />
+      <!-- <MyOclockControl class="oclock__program-control" /> -->
       <MyOclockAlarmsProgram/>
     </div>
     <div v-else-if="currentMenu === 'Stopwatch'" class="world__oclock">
@@ -19,15 +18,14 @@
 </template>
 
 <script>
-import MyOclockControl from './PartsProgram/Oclock/MyOclockControl.vue';
 import MyOclockMenu from './PartsProgram/Oclock/MyOclockMenu.vue';
 import MyOclockAlarmsProgram from './PartsProgram/Oclock/MyOclockAlarmsProgram.vue';
-import MyOclockOclockProgram from './PartsProgram/Oclock/MyOclockOclockProgram.vue';
+import MyOclockOclockProgram from './PartsProgram/Oclock/MyOclockWorldProgram.vue';
 import MyOclockStopwatchProgram from './PartsProgram/Oclock/MyOclockStopwatchProgram.vue';
 import MyOclockTimersProgram from './PartsProgram/Oclock/MyOclockTimersProgram.vue';
 
 export default {
-  components: { MyOclockControl, MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
+  components: { MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
   data() {
     return {
       currentMenu: "WorldClock"
@@ -46,10 +44,6 @@ export default {
   width: 335px;
   height: 705px;
   padding: 50px 10px 15px;
-}
-
-.oclock__program-control {
-  margin-bottom: 10px;
 }
 
 
