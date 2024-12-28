@@ -1,7 +1,7 @@
 <template>
   <div class="calculator__program">
     <svg
-      @click="showHistory = !showHistory "
+      @click="showHistory = !showHistory"
       class="calculator__program-history"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -377,7 +377,7 @@ export default {
       this.isOperation = "";
     },
     clearHistory() {
-      this.historyOperation = []
+      this.historyOperation = [];
     },
     calcInterest(numOne, numTwo) {
       return (numOne / numTwo) * 100;
@@ -422,7 +422,7 @@ export default {
       } else {
         this.nextNumber = -Number(this.nextNumber);
       }
-    },  
+    },
   },
 };
 </script>

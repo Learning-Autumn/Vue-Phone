@@ -1,24 +1,22 @@
 <template>
   <div class="oclock__timers">
-    <h2 class="oclock__program-title">
-      Timers
-    </h2>
+    <h2 class="oclock__program-title">Timers</h2>
 
     <div class="oclock__control">
       <button class="oclock__control-btn oclock__control-btn--left" type="">Lap</button>
-      <div>
-        .
-      </div>
-      <button class="oclock__control-btn oclock__control-btn--right" type="">Start</button>
+      <div>.</div>
+      <button class="oclock__control-btn oclock__control-btn--right" type="">
+        Start
+      </button>
     </div>
-     
+
     <div class="oclock__desc">
       <ul class="oclock__desc-list">
         <li class="oclock__desc-item">
           <p class="oclock__desc-item-title">Назва</p>
           <p class="oclock__desc-item-title">Таймер</p>
         </li>
-        <hr class="oclock__desc-line">
+        <hr class="oclock__desc-line" />
         <li class="oclock__desc-item">
           <p class="oclock__desc-item-title">У кінці</p>
           <p class="oclock__desc-item-title">Качка</p>
@@ -29,9 +27,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>

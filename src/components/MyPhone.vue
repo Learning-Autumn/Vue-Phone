@@ -2446,7 +2446,7 @@ export default {
       isStart: false,
       isLoads: true, //false
       state: reactive({
-        isOpenProgram: "OclockApp",  // реактивний об’єкт для передачі в provide
+        isOpenProgram: "OclockApp", // реактивний об’єкт для передачі в provide
       }),
       isLoading: 0,
     };
@@ -2454,7 +2454,7 @@ export default {
   provide() {
     return {
       state: this.state,
-      setProgram: this.setProgram
+      setProgram: this.setProgram,
     };
   },
   methods: {
@@ -2486,7 +2486,7 @@ export default {
     normal_Startup() {
       if (this.isLoads) {
         this.isOpen = !this.isOpen;
-        this.state.isOpenProgram = '';
+        this.state.isOpenProgram = "";
         // Викликаємо метод setUnlocked в MyPhoneOS при виконанні умови
         if (this.isOpen && this.isLoads) {
           this.$refs.myPhoneOS.setUnlocked(false);
@@ -2495,7 +2495,7 @@ export default {
     },
     full_Launch() {
       if (!this.isOpen && !this.isStart) {
-        this.state.isOpenProgram = '';
+        this.state.isOpenProgram = "";
         this.isStart = true;
         this.isOpen = true;
         this.isLoading = 1;
@@ -2529,7 +2529,7 @@ export default {
       this.state.isOpenProgram = programName;
     },
     closeProgram() {
-      this.state.isOpenProgram = '';
+      this.state.isOpenProgram = "";
     },
   },
 };

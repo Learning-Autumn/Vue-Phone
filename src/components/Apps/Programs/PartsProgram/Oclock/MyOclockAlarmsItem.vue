@@ -1,7 +1,7 @@
 <template>
   <li class="oclock__program-item">
     <div class="oclock__program-item-left">
-      <p class="oclock__program-bottom">01:45</p>
+      <p class="oclock__program-bottom">{{Time}}</p>
       <p class="oclock__program-top">Alarm</p>
     </div>
     <div class="oclock__program-item-right">
@@ -15,7 +15,13 @@ import MyToggleSwitches from './MyToggleSwitches.vue';
 
 
 export default {
-  components: { MyToggleSwitches }
+  components: { MyToggleSwitches },
+  props: {
+    Time: {
+      type: String,
+      required: true,
+    }
+  },
 }
 </script>
 

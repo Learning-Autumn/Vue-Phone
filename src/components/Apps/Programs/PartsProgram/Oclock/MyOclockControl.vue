@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    handleAddClick() {
+    handleAddClick() {   
       this.$emit('add-click', this.parentId)
     }
   }
