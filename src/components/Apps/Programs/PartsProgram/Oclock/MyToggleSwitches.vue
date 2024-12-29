@@ -1,64 +1,55 @@
-<style scoped>
-  .switch {
-    --button-width: 2.8em;
-    --button-height: 1.6em;
-    --toggle-diameter: 1.2em;
-    --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
-    --toggle-shadow-offset: 8px;
-    --toggle-wider: 2.4em;
-    --color-grey: #cccccc;
-    --color-green: #ff9f0a;
-  }
-
-  .slider {
-    display: inline-block;
-    width: var(--button-width);
-    height: var(--button-height);
-    background-color: var(--color-grey);
-    border-radius: calc(var(--button-height) / 2);
-    position: relative;
-    transition: 0.3s all ease-in-out;
-  }
-
-  .slider::after {
-    content: "";
-    display: inline-block;
-    width: var(--toggle-diameter);
-    height: var(--toggle-diameter);
-    background-color: #fff;
-    border-radius: calc(var(--toggle-diameter) / 2);
-    position: absolute;
-    top: var(--button-toggle-offset);
-    transform: translateX(var(--button-toggle-offset));
-    box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
-    transition: 0.3s all ease-in-out;
-  }
-
-  .switch input[type="checkbox"]:checked + .slider {
-    background-color: var(--color-green);
-  }
-
-  .switch input[type="checkbox"]:checked + .slider::after {
-    transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
-    box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
-  }
-
-  .switch input[type="checkbox"] {
-    display: none;
-  }
-
-  .switch input[type="checkbox"]:active + .slider::after {
-    width: var(--toggle-wider);
-  }
-
-  .switch input[type="checkbox"]:checked:active + .slider::after {
-    transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
-  }
-</style>
-
 <template>
-  <label class="switch">
-    <input type="checkbox">
-    <span class="slider"></span>
-  </label>
+  <div @click="toggleSwitches" class="toggleSwitches__container">
+    <div  :class="['toggleSwitches__circle', { active: isLocalActive }]">
+    </div>
+  </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isLocalActive: this.isActive,
+    }
+  },
+  props: {
+    isActive: {
+      type: Boolean,
+      require: true,
+    }
+  },
+  methods: {
+    toggleSwitches(){
+      this.isLocalActive = !this.isLocalActive
+      this.$emit('toggleSwitches', this.isLocalActive)
+    }
+  },
+}
+</script>
+<style scoped>
+.toggleSwitches__container {
+  width: 50px;
+  background-color: #262628;
+  height: 28px;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+}
+.toggleSwitches__circle {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #848484;
+
+  transition: transform 0.3s ease;
+
+}
+.toggleSwitches__circle.active {
+  transform: translateX(22px); 
+  background-color: #fff;
+
+}
+</style>

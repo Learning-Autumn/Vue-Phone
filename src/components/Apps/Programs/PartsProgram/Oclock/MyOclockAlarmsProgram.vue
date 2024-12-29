@@ -33,7 +33,7 @@
     
     <div v-else class="clock__program-add">
       <!-- <p class="clock__program-info">{{ this.infoWorld }}</p> -->
-      <MyOclockAlarmsSlider/>
+      <MyOclockAlarmsSlider @addTime="fetchTime"/>
       <!-- <input class="clock__program-input" placeholder="Введіть місто" v-model="isTime" type="" name="" value="">
       <button class="clock__program-btn" @click="fetchTime" type="">Add</button> -->
     </div>
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       isInput: false,
-      isTime: 0,
+      // isTime: 0,
       dataAlarms: [
         {
           'Time': '01:45', 
@@ -58,7 +58,7 @@ export default {
         },
         {
           'Time': '02:30', 
-          'isActive': true,
+          'isActive': false,
         },
         {
           'Time': '02:30', 
@@ -66,11 +66,11 @@ export default {
         },
         {
           'Time': '02:30', 
-          'isActive': true,
+          'isActive': false,
         },
         {
           'Time': '02:30', 
-          'isActive': true,
+          'isActive': false,
         }
       ],
     }
@@ -79,13 +79,14 @@ export default {
     handleAdd() {
       this.isInput = !this.isInput;
     },
-    fetchTime() {
+    fetchTime(time) {
       this.dataAlarms.push(
         {
-          'Time': this.isTime,
+          'Time': time,
           'isActive': true,
         }
       )
+      this.handleAdd()
     }
   }
 }

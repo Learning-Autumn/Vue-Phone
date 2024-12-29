@@ -34,7 +34,7 @@
           :key="item"
           class="oclock__slider-item"
         >
-          {{ item }}
+          {{ String(item).padStart(2, '0') }}
         </li>
       </VueSlickCarousel>
       <button
@@ -113,7 +113,7 @@
         </svg>
       </button>
     </ul>
-    <button class="alarms__add-btn" type="">Add</button>
+    <button @click="sendTimeToParent" class="alarms__add-btn" type="">Add</button>
   </div>
 </template>
 
@@ -226,6 +226,10 @@ export default {
         }, 550);
       }
     },
+    sendTimeToParent(){
+      let time = `${this.selectHour}:${this.selectMinutes}`
+      this.$emit("addTime", time)
+    }
   },
 };
 </script>

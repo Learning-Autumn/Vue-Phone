@@ -1,5 +1,12 @@
 <template>
   <div class="oclock__timers">
+
+    <div class="oclock__program-inner">
+      <p class="oclock__control-text">
+        Edit
+      </p>
+    </div>
+
     <h2 class="oclock__program-title">Timers</h2>
 
     <div class="oclock__control">
@@ -31,8 +38,19 @@ export default {};
 </script>
 
 <style scoped>
+.oclock__program-inner {
+  display: flex;
+  justify-content: space-between;
+  color: #ff9f0a;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  margin-bottom: 10px;
+  height: 28px;
+}
+
 .oclock__program-title {
-  margin-top: 38px;
   font-size: 26px;
   margin-bottom: 20px;
 }
