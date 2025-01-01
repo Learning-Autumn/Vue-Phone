@@ -88,7 +88,14 @@
         </svg>
       </button>
       <VueSlickCarousel v-bind="settings_right" ref="carousel__right" :arrows="false">
-        <li v-for="item in 60" :key="item" class="oclock__slider-item">{{ item }}</li>
+        <li 
+          v-for="item in 60"
+          @click="setSelectMinutes(item)"
+          :key="item" 
+          class="oclock__slider-item"
+        >
+          {{ item }}
+        </li>
       </VueSlickCarousel>
       <button class="alarms__slider-arrow" @click="showRightNext">
         <svg
@@ -163,6 +170,10 @@ export default {
       this.selectHour = item;
       console.log("Selected Hour:", this.selectHour);
     },
+    setSelectMinutes(item) {
+      this.selectMinutes = item;
+      console.log("Selected Minutes:", this.selectMinutes);
+    },
     setActive(index) {
       this.activeIndex = index;
     },
@@ -234,7 +245,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .slick-current {
   color: #ff9f0a;
 }

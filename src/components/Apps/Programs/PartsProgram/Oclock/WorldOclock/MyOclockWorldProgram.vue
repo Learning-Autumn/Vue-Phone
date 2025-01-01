@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import MyOclockControl from '../Oclock/MyOclockControl.vue';
+import MyOclockControl from '../MyOclockControl.vue';
 
 export default {
   components: { MyOclockControl },

@@ -42,7 +42,7 @@
 
 <script>
 import MyOclockAlarmsItem from './MyOclockAlarmsItem.vue';
-import MyOclockControl from '../Oclock/MyOclockControl.vue';
+import MyOclockControl from '../MyOclockControl.vue';
 import MyOclockAlarmsSlider from './MyOclockAlarmsSlider.vue';
 
 export default {

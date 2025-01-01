@@ -19,10 +19,10 @@
 
 <script>
 import MyOclockMenu from './PartsProgram/Oclock/MyOclockMenu.vue';
-import MyOclockAlarmsProgram from './PartsProgram/Oclock/MyOclockAlarmsProgram.vue';
-import MyOclockOclockProgram from './PartsProgram/Oclock/MyOclockWorldProgram.vue';
-import MyOclockStopwatchProgram from './PartsProgram/Oclock/MyOclockStopwatchProgram.vue';
-import MyOclockTimersProgram from './PartsProgram/Oclock/MyOclockTimersProgram.vue';
+import MyOclockAlarmsProgram from './PartsProgram/Oclock/Alarms/MyOclockAlarmsProgram.vue';
+import MyOclockOclockProgram from './PartsProgram/Oclock/WorldOclock/MyOclockWorldProgram.vue';
+import MyOclockStopwatchProgram from './PartsProgram/Oclock/Stopwatch/MyOclockStopwatchProgram.vue';
+import MyOclockTimersProgram from './PartsProgram/Oclock/Timers/MyOclockTimersProgram.vue';
 
 export default {
   components: { MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
