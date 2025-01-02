@@ -17,7 +17,11 @@
       <button class="oclock__control-btn oclock__control-btn--left" type="">
         Cancel
       </button>
-      <button class="oclock__control-btn oclock__control-btn--right" type="">
+      <button 
+        @click="addTimers"
+        class="oclock__control-btn oclock__control-btn--right" 
+        type=""
+      >
         Start
       </button>
     </div>
@@ -35,14 +39,42 @@
         </li>
       </ul>
     </div>
+
+    <h6 class="oclock__program-list-desc">Recents</h6>
+    <ul class="oclock__program-list">
+      <MyOclockTimersItem v-for="(item, index) in dataTimers" :Time="item.Time" :TimeLeft="item.TimeLeft" :isActive="item.isActive" :key="index"/>
+    </ul>
   </div>
 </template>
 
 <script>
 import MyOclockTimersSlider from "./MyOclockTimersSlider.vue";
+import MyOclockTimersItem from "./MyOclockTimersItem.vue";
+
 
 export default {
-  components: { MyOclockTimersSlider }
+  components: { MyOclockTimersSlider, MyOclockTimersItem },
+  data() {
+    return {
+      dataTimers: {
+        'Time': {
+          'minutes': 20,
+          'seconds': 20
+        },
+        'TimeLeft': {
+          'minutes': 20,
+          'seconds': 20
+        },
+        'isActive': true,
+      },
+    }
+  },
+  methods: {
+    addTimers(){
+      console.log(123);
+      
+    }
+  }
 };
 </script>
 
@@ -98,6 +130,7 @@ export default {
   border-radius: 15px;
   padding: 15px;
   font-size: 13px;
+  margin-bottom: 35px;
 }
 
 .oclock__desc-list {

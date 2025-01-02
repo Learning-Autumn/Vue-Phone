@@ -176,11 +176,11 @@ export default {
 
 
 .oclock__slider-selected--left {
-  left: 55px;
+  left: 50px;
 }
 
 .oclock__slider-selected--center {
-  left: 135px;
+  left: 132px;
 }
 
 .oclock__slider-selected--right {
