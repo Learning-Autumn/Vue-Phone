@@ -28,7 +28,7 @@ export default {
   components: { MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
   data() {
     return {
-      currentMenu: "WorldClock"
+      currentMenu: "Timers"
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
 
 .world__oclock {
   height: 550px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 </style>

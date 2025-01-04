@@ -18,7 +18,8 @@ export default {
 <style>
 .app {
   background-color: #8792d15e;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
 
 .container {

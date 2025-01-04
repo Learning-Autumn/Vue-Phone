@@ -22,6 +22,7 @@
       <VueSlickCarousel v-bind="settings_right" ref="carousel__center" :arrows="false">
         <li 
           v-for="item in Array.from({length: 60}, (_, index) => index)" 
+          @click="setSelectMinute(item)"
           :key="item" 
           class="oclock__slider-item"
         >
@@ -32,7 +33,8 @@
     <ul class="oclock__slider-list oclock__slider-list--right">
       <VueSlickCarousel v-bind="settings_right" ref="carousel__right" :arrows="false">
         <li 
-          v-for="item in Array.from({length: 60}, (_, index) => index)" 
+          v-for="item in Array.from({length: 60}, (_, index) => index)"
+          @click="setSelectSecond(item)"
           :key="item" 
           class="oclock__slider-item"
         >
@@ -54,8 +56,9 @@ export default {
   components: { VueSlickCarousel },
   data() {
     return {
-      selectHour: 12,
-      selectMinutes: 30,
+      selectHour: 0,
+      selectMinutes: 0,
+      selectSecond: 0,
       isLeftButtonDisabled: false,
       isRightButtonDisabled: false,
       settings_left: {
@@ -101,9 +104,35 @@ export default {
       this.selectHour = item;
       console.log("Selected Hour:", this.selectHour);
     },
+    setSelectMinute(item) {
+      this.selectMinutes = item;
+      console.log("Selected Minute:", this.selectMinutes);
+    },
+    setSelectSecond(item) {
+      this.selectSecond = item;
+      console.log("Selected Second:", this.selectSecond);
+    },
     setActive(index) {
       this.activeIndex = index;
     },
+    addTimerData(){
+      let timerMinutes = String(this.selectMinutes).padStart(2, '0')
+      let timerSeconds = String(this.selectSecond).padStart(2, '0')
+
+      const timer = {
+        'Time': {
+          'minutes': timerMinutes,
+          'seconds': timerSeconds,
+        },
+        'TimeLeft': {
+          'minutes': timerMinutes,
+          'seconds': timerSeconds,
+        },
+        'isActive': true,
+      }
+      
+      return timer
+    }
   },
 };
 </script>

@@ -9,16 +9,20 @@
 
     <h2 class="oclock__program-title">Timers</h2>
 
-    <div class="oclock__edit">
-      <MyOclockTimersSlider></MyOclockTimersSlider>
+    <div class="oclock__timers-edit" v-if="isShowMode">
+      <MyOclockTimersSlider ref="timerData"></MyOclockTimersSlider>
     </div>
 
-    <div class="oclock__control">
+    <div class="oclock__timers-show" v-else>
+      Time
+    </div>
+
+    <div class="oclock__timers-control">
       <button class="oclock__control-btn oclock__control-btn--left" type="">
         Cancel
       </button>
       <button 
-        @click="addTimers"
+        @click="startTimers"
         class="oclock__control-btn oclock__control-btn--right" 
         type=""
       >
@@ -35,7 +39,7 @@
         <hr class="oclock__desc-line" />
         <li class="oclock__desc-item">
           <p class="oclock__desc-item-title">When Timer Ends</p>
-          <p class="oclock__desc-item-title">Radial</p>
+          <p class="oclock__desc-item-title oclock__desc-item-title--radial">Radial</p>
         </li>
       </ul>
     </div>
@@ -56,23 +60,41 @@ export default {
   components: { MyOclockTimersSlider, MyOclockTimersItem },
   data() {
     return {
-      dataTimers: {
-        'Time': {
-          'minutes': 20,
-          'seconds': 20
+      isShowMode: true,
+      isShowTime: "",
+      dataTimers: [
+        {
+          'Time': {
+            'minutes': 20,
+            'seconds': 13
+          },
+          'TimeLeft': {
+            'minutes': 20,
+            'seconds': 13
+          },
+          'isActive': true,
         },
-        'TimeLeft': {
-          'minutes': 20,
-          'seconds': 20
-        },
-        'isActive': true,
-      },
+        {
+          'Time': {
+            'minutes': 20,
+            'seconds': 13
+          },
+          'TimeLeft': {
+            'minutes': 20,
+            'seconds': 13
+          },
+          'isActive': true,
+        }
+      ]
     }
   },
   methods: {
-    addTimers(){
-      console.log(123);
+    startTimers(){
+      this.isShowMode = !this.isShowMode;
+      const timer = this.$refs.timerData.addTimerData()
+      console.log(timer);
       
+      this.dataTimers.push(timer)
     }
   }
 };
@@ -96,6 +118,10 @@ export default {
   margin-bottom: 20px;
 }
 
+.oclock__timers-show {
+  height: 190px;
+}
+
 .oclock__control-btn {
   width: 70px;
   height: 70px;
@@ -104,7 +130,7 @@ export default {
   margin-bottom: 25px;
 }
 
-.oclock__control {
+.oclock__timers-control {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -118,7 +144,7 @@ export default {
   color: #848484;
 }
 .oclock__control-btn--right {
-  background-color: #092911;
+  background-color: #010b03;
   border: none;
   color: #5dcb85;
 }
@@ -130,7 +156,7 @@ export default {
   border-radius: 15px;
   padding: 15px;
   font-size: 13px;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 .oclock__desc-list {
@@ -148,5 +174,42 @@ export default {
 
 .oclock__desc-item-title--timer {
   color: #848484;
+}
+
+.oclock__desc-item-title--radial {
+  color: #adadaf;
+}
+
+.oclock__program-list {
+  overflow-y: auto;
+  height: 65px;
+}
+
+/* Стилізація полоси прокрутки для браузерів на основі WebKit */
+.oclock__program-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.oclock__program-list::-webkit-scrollbar-track {
+  background: #262628;
+  border-radius: 10px;
+  
+}
+
+.oclock__program-list::-webkit-scrollbar-thumb {
+  background-color: #ff9f0a; 
+  border-radius: 10px;
+  border: 2px solid #262628; 
+}
+
+.oclock__program-list::-webkit-scrollbar-thumb:hover {
+  background-color: #ff7a00; 
+}
+
+.oclock__program-list-desc {
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(132, 132, 132, 0.3);
 }
 </style>
