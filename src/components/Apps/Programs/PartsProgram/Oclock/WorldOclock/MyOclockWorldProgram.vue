@@ -79,7 +79,6 @@ export default {
             }
             
           }
-          console.log();
 
         })
         .catch(error => {

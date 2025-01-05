@@ -102,31 +102,21 @@ export default {
   methods: {
     setSelectHour(item) {
       this.selectHour = item;
-      console.log("Selected Hour:", this.selectHour);
     },
     setSelectMinute(item) {
       this.selectMinutes = item;
-      console.log("Selected Minute:", this.selectMinutes);
     },
     setSelectSecond(item) {
       this.selectSecond = item;
-      console.log("Selected Second:", this.selectSecond);
     },
     setActive(index) {
       this.activeIndex = index;
     },
     addTimerData(){
-      let timerMinutes = String(this.selectMinutes).padStart(2, '0')
-      let timerSeconds = String(this.selectSecond).padStart(2, '0')
-
       const timer = {
         'Time': {
-          'minutes': timerMinutes,
-          'seconds': timerSeconds,
-        },
-        'TimeLeft': {
-          'minutes': timerMinutes,
-          'seconds': timerSeconds,
+          'minutes': this.selectMinutes,
+          'seconds': this.selectSecond,
         },
         'isActive': true,
       }
@@ -175,6 +165,10 @@ export default {
   transform-origin: center;
   display: inline-block;
   transition: transform 0.3s ease-in-out;
+}
+
+.slick-active .oclock__slider-item {
+  transform: rotateX(0deg);
 }
 
 .oclock__slider-item:hover {

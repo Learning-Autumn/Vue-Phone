@@ -8,23 +8,28 @@
     </div>
 
     <h2 class="oclock__program-title">Timers</h2>
-
-    <div class="oclock__timers-edit" v-if="isShowMode">
+    <div class="oclock__timers-edit" v-if="!isShowMode">
       <MyOclockTimersSlider ref="timerData"></MyOclockTimersSlider>
     </div>
 
     <div class="oclock__timers-show" v-else>
-      Time
+      <p class="oclock__timers-time">
+        {{ String(isShowTime.minutes).padStart(2, '0') }}:{{ String(isShowTime.seconds).padStart(2, '0') }}
+      </p>
     </div>
 
     <div class="oclock__timers-control">
-      <button class="oclock__control-btn oclock__control-btn--left" type="">
+      <button 
+        @click="cancelTimer"
+        class="oclock__control-btn oclock__control-btn--left" 
+        type="button"
+      >
         Cancel
       </button>
       <button 
-        @click="startTimers"
+        @click="handlerTimer"
         class="oclock__control-btn oclock__control-btn--right" 
-        type=""
+        type="button"
       >
         Start
       </button>
@@ -46,7 +51,7 @@
 
     <h6 class="oclock__program-list-desc">Recents</h6>
     <ul class="oclock__program-list">
-      <MyOclockTimersItem v-for="(item, index) in dataTimers" :Time="item.Time" :TimeLeft="item.TimeLeft" :isActive="item.isActive" :key="index"/>
+      <MyOclockTimersItem @startTimer="fetchTimer" v-for="(item, index) in dataTimers" :Time="item.Time" :TimeLeft="item.TimeLeft" :isActive="item.isActive" :key="index"/>
     </ul>
   </div>
 </template>
@@ -60,41 +65,77 @@ export default {
   components: { MyOclockTimersSlider, MyOclockTimersItem },
   data() {
     return {
-      isShowMode: true,
-      isShowTime: "",
+      isShowMode: false,
+      isShowTime: {},
+      isActiveTimer: false,
+      timer: null,
       dataTimers: [
         {
           'Time': {
             'minutes': 20,
             'seconds': 13
-          },
-          'TimeLeft': {
-            'minutes': 20,
-            'seconds': 13
-          },
-          'isActive': true,
+          }
         },
         {
           'Time': {
             'minutes': 20,
             'seconds': 13
-          },
-          'TimeLeft': {
-            'minutes': 20,
-            'seconds': 13
-          },
-          'isActive': true,
+          }
         }
       ]
     }
   },
   methods: {
-    startTimers(){
-      this.isShowMode = !this.isShowMode;
-      const timer = this.$refs.timerData.addTimerData()
-      console.log(timer);
+    handlerTimer(){
+      this.isActiveTime = !this.isActiveTime;
+      console.log(this.isActiveTime);
+
+      if (!this.isShowMode){
+        const timer = this.$refs.timerData.addTimerData()
+        if (JSON.stringify(timer.Time) === '{"minutes":0,"seconds":0}'){
+          return        
+        }
+        this.isShowMode = true;
+        console.log(this.isActiveTime);
+        
+        this.dataTimers.push(timer)
+        this.isShowTime = timer.Time
+  
+        this.controlTimer()
+      } else {
+        this.controlTimer()
+      }
+    },
+    cancelTimer(){
+      this.isShowMode = false;
+      // this.isActiveTime = false;
+      this.isShowTime = "";
+    },
+    fetchTimer(time){
+      this.isShowMode = true;
+      this.isActiveTime = true;
+      this.isShowTime = time
+      this.controlTimer()
+
+    },
+    controlTimer(){
+      console.log('HERE =-=-=-', this.isActiveTimer);
       
-      this.dataTimers.push(timer)
+      if(this.isActiveTimer) {
+        clearInterval(this.timer);
+        this.isActiveTimer = false;
+      } else {
+        this.timer = setInterval(() => this.updateTimer(), 1000)
+      }
+    },
+    updateTimer(){
+      if (this.isShowTime.seconds === 0) {
+        this.isShowTime.seconds = 60
+        this.isShowTime.minutes -= 1 
+      }
+
+      this.isShowTime.seconds -= 1
+
     }
   }
 };
@@ -128,6 +169,15 @@ export default {
   border-radius: 50%;
   cursor: pointer;
   margin-bottom: 25px;
+}
+
+.oclock__timers-show {
+}
+
+.oclock__timers-time {
+  padding-top: 45px;
+  font-size: 76px;
+  text-align: center;
 }
 
 .oclock__timers-control {
