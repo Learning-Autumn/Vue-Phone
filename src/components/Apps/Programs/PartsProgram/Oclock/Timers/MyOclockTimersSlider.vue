@@ -118,7 +118,6 @@ export default {
           'minutes': this.selectMinutes,
           'seconds': this.selectSecond,
         },
-        'isActive': true,
       }
       
       return timer

@@ -29,9 +29,10 @@
       <button 
         @click="handlerTimer"
         class="oclock__control-btn oclock__control-btn--right" 
+        :class="{'oclock__control-btn--pause' : isActiveTimer }"
         type="button"
       >
-        Start
+        {{ isActiveTimer ? 'Pause' : 'Start' }}
       </button>
     </div>
 
@@ -78,7 +79,7 @@ export default {
         },
         {
           'Time': {
-            'minutes': 20,
+            'minutes': 10,
             'seconds': 13
           }
         }
@@ -87,55 +88,61 @@ export default {
   },
   methods: {
     handlerTimer(){
-      this.isActiveTime = !this.isActiveTime;
-      console.log(this.isActiveTime);
-
       if (!this.isShowMode){
         const timer = this.$refs.timerData.addTimerData()
-        if (JSON.stringify(timer.Time) === '{"minutes":0,"seconds":0}'){
-          return        
-        }
-        this.isShowMode = true;
-        console.log(this.isActiveTime);
-        
-        this.dataTimers.push(timer)
-        this.isShowTime = timer.Time
-  
-        this.controlTimer()
+        this.addTimer(timer)
       } else {
-        this.controlTimer()
+        this.pauseTimer()
       }
+  
+    },
+    addTimer(timer){
+      if (JSON.stringify(timer) !== '{"Time":{"minutes":0,"seconds":0}}') {
+        this.isShowMode = true;
+        this.dataTimers.push(timer)
+        this.isShowTime = JSON.parse(JSON.stringify(timer.Time))
+        this.controletTimer()
+      }
+    },
+    pauseTimer(){
+      this.controletTimer()
+      this.isActiveTimer = false;
     },
     cancelTimer(){
       this.isShowMode = false;
-      // this.isActiveTime = false;
+      this.isActiveTimer = false;
       this.isShowTime = "";
     },
     fetchTimer(time){
       this.isShowMode = true;
-      this.isActiveTime = true;
-      this.isShowTime = time
-      this.controlTimer()
-
+      this.isActiveTimer = false;
+      this.isShowTime = JSON.parse(JSON.stringify(time));
+      this.controletTimer()
     },
-    controlTimer(){
-      console.log('HERE =-=-=-', this.isActiveTimer);
-      
-      if(this.isActiveTimer) {
+    controletTimer(){
+      if (this.isActiveTimer){
         clearInterval(this.timer);
         this.isActiveTimer = false;
       } else {
-        this.timer = setInterval(() => this.updateTimer(), 1000)
+        this.isActiveTimer = true;
+        this.timer = setInterval(() => {
+          this.updatedTimer()
+        }, 1000);
       }
     },
-    updateTimer(){
-      if (this.isShowTime.seconds === 0) {
-        this.isShowTime.seconds = 60
-        this.isShowTime.minutes -= 1 
+    updatedTimer(){
+      if (this.isShowTime.seconds === 0){
+        if (this.isShowTime.minutes === 0){
+          this.controletTimer()
+          
+        } else {
+          this.isShowTime.minutes--
+          this.isShowTime.seconds = 59
+        }
+      } else {
+        this.isShowTime.seconds--
       }
-
-      this.isShowTime.seconds -= 1
-
+      
     }
   }
 };
@@ -197,6 +204,10 @@ export default {
   background-color: #010b03;
   border: none;
   color: #5dcb85;
+}
+
+.oclock__control-btn--pause {
+  background-color: #022d0b;
 }
 
 .oclock__desc {

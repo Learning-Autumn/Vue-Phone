@@ -31,7 +31,10 @@
     },
     methods: {
       startTimer(){
-        this.$emit('startTimer', this.Time)
+        if (JSON.stringify(this.Time) !== '{"minutes":0,"seconds":0}'){
+          this.$emit('startTimer', this.Time)
+        }
+        
       }
     },
   }
