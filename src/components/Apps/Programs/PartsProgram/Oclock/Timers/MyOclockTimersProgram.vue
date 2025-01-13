@@ -109,11 +109,13 @@ export default {
       this.isActiveTimer = false;
     },
     cancelTimer(){
+      clearInterval(this.timer);
       this.isShowMode = false;
       this.isActiveTimer = false;
       this.isShowTime = "";
     },
     fetchTimer(time){
+      this.cancelTimer()
       this.isShowMode = true;
       this.isActiveTimer = false;
       this.isShowTime = JSON.parse(JSON.stringify(time));
@@ -133,8 +135,9 @@ export default {
     updatedTimer(){
       if (this.isShowTime.seconds === 0){
         if (this.isShowTime.minutes === 0){
+          this.startNotification()
           this.controletTimer()
-          
+          // this.cancelTimer()
         } else {
           this.isShowTime.minutes--
           this.isShowTime.seconds = 59
@@ -142,7 +145,15 @@ export default {
       } else {
         this.isShowTime.seconds--
       }
-      
+    },
+    startNotification(){
+      const audio = new Audio(require('@/assets/audio/WhereIsMyMind.mp3'));
+
+      audio.play().then(() => {
+        console.log('Відтворення почалося');
+      }).catch((error) => {
+        console.error('Помилка відтворення:', error);
+      })
     }
   }
 };
