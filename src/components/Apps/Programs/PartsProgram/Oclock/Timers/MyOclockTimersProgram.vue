@@ -13,7 +13,9 @@
     </div>
 
     <div class="oclock__timers-show" v-else>
-      <p class="oclock__timers-time">
+      <p 
+        :class="['oclock__timers-time', {'oclock__timers-timeEnds': isTimersEnds}]"
+      >
         {{ String(isShowTime.minutes).padStart(2, '0') }}:{{ String(isShowTime.seconds).padStart(2, '0') }}
       </p>
     </div>
@@ -69,7 +71,9 @@ export default {
       isShowMode: false,
       isShowTime: {},
       isActiveTimer: false,
+      isTimersEnds: false,
       timer: null,
+      audio: null,
       dataTimers: [
         {
           'Time': {
@@ -112,7 +116,9 @@ export default {
       clearInterval(this.timer);
       this.isShowMode = false;
       this.isActiveTimer = false;
+      this.isTimersEnds = false;
       this.isShowTime = "";
+      this.audio.pause()
     },
     fetchTimer(time){
       this.cancelTimer()
@@ -135,6 +141,7 @@ export default {
     updatedTimer(){
       if (this.isShowTime.seconds === 0){
         if (this.isShowTime.minutes === 0){
+          this.isTimersEnds = true;
           this.startNotification()
           this.controletTimer()
           // this.cancelTimer()
@@ -147,9 +154,9 @@ export default {
       }
     },
     startNotification(){
-      const audio = new Audio(require('@/assets/audio/WhereIsMyMind.mp3'));
+      this.audio = new Audio(require('@/assets/audio/WhereIsMyMind.mp3'));
 
-      audio.play().then(() => {
+      this.audio.play().then(() => {
         console.log('Відтворення почалося');
       }).catch((error) => {
         console.error('Помилка відтворення:', error);
@@ -196,6 +203,21 @@ export default {
   padding-top: 45px;
   font-size: 76px;
   text-align: center;
+}
+
+.oclock__timers-timeEnds {
+  animation: text-grow-shrink 2s infinite;
+}
+
+@keyframes text-grow-shrink {
+  0%, 100% {
+    transform: scale(1); /* початковий розмір */
+    color: #c7c7c7;
+  }
+  50% {
+    transform: scale(1.05); /* збільшення на 25% */
+    color: white;
+  }
 }
 
 .oclock__timers-control {

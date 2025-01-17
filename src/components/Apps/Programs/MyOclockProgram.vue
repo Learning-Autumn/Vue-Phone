@@ -28,7 +28,7 @@ export default {
   components: { MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
   data() {
     return {
-      currentMenu: "Timers"
+      currentMenu: "Alarms"
     }
   },
   methods: {

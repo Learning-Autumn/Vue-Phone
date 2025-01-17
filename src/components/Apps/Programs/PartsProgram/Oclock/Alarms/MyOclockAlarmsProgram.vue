@@ -4,7 +4,7 @@
     <h2 class="oclock__program-title">
       Alarms
     </h2>
-    <div v-if="!isInput" class="oclock__alerms-content">
+    <div v-if="!isDateLineAlarms && !isInput" class="oclock__alerms-content">
       <p class="oclock__program-desc">
         <svg fill="#fff" width="18px" height="18px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#fff">
@@ -31,11 +31,20 @@
       </ul>
     </div>
     
-    <div v-else class="clock__program-add">
+    <div v-else-if="!isDateLineAlarms && isInput" class="clock__program-add">
       <!-- <p class="clock__program-info">{{ this.infoWorld }}</p> -->
       <MyOclockAlarmsSlider @addTime="fetchTime"/>
       <!-- <input class="clock__program-input" placeholder="Введіть місто" v-model="isTime" type="" name="" value="">
       <button class="clock__program-btn" @click="fetchTime" type="">Add</button> -->
+    </div>
+    <div v-else :class="['oclock__alarms-time', {'oclock__alarms-time--dateLine': isDateLineAlarms}]">
+      {{ isTimeDateLine }}
+      <button 
+        @click="cancelDateLineAlarms" 
+        class="oclock__alarms-cancel"
+      >
+        Wake up!
+      </button>
     </div>
   </div>
 </template>
@@ -50,10 +59,13 @@ export default {
   data() {
     return {
       isInput: false,
-      // isTime: 0,
+      isDateLineAlarms: false,
+      isTimeDateLine: null,
+      interval: null,
+      audio: null,
       dataAlarms: [
         {
-          'Time': '01:45', 
+          'Time': '22:44', 
           'isActive': true,
         },
         {
@@ -87,8 +99,38 @@ export default {
         }
       )
       this.handleAdd()
-    }
-  }
+    },
+    cancelDateLineAlarms(){
+      this.isDateLineAlarms = false
+      this.startIntervalAlarms()
+    },
+    checkAlarms(){
+      const now = new Date()
+      const currentTime = now.toTimeString().slice(0, 5)
+      this.dataAlarms.forEach(item => {
+        if (item.isActive && item.Time === currentTime){
+          clearInterval(this.interval)
+          this.isTimeDateLine = currentTime
+          this.startAlarmSignal()
+        }
+      });     
+      
+    },
+    startAlarmSignal(){
+      this.audio = new Audio(require('@/assets/audio/WhereIsMyMind.mp3'));
+      this.isDateLineAlarms = true;
+      this.audio.play().catch((error) => {
+        console.error('Помилка відтворення:', error);
+      })
+    },
+    startIntervalAlarms(){
+      this.interval = setInterval(this.checkAlarms, 5000)
+    },
+  },
+  mounted() {
+    this.checkAlarms()
+    this.startIntervalAlarms()
+  },
 }
 </script>
 
@@ -104,6 +146,42 @@ export default {
   overflow-y: auto;
   padding-right: 10px;
   padding-bottom: 50px;
+}
+
+.oclock__alarms-time {
+  display: flex;
+  flex-direction: column;
+  margin-top: 85px;
+  font-size: 76px;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+}
+
+.oclock__alarms-time--dateLine {
+  animation: text-grow-shrink 2s infinite;
+}
+
+@keyframes text-grow-shrink {
+  0%, 100% {
+    transform: scale(1); /* початковий розмір */
+    color: #c7c7c7;
+  }
+  50% {
+    transform: scale(1.05); /* збільшення на 25% */
+    color: white;
+  }
+}
+
+.oclock__alarms-cancel {
+  background-color: #010b03;
+  color: #5dcb85;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  height: 70px;
+  width: 70px;
 }
 
 /* Стилізація полоси прокрутки для браузерів на основі WebKit */
