@@ -6,6 +6,7 @@
     <MyWeatherProgram v-if="state.isOpenProgram === 'WeatherWidgets'" />
     <MyPinPongProgram v-if="state.isOpenProgram === 'PinPongApp'" />
     <MyOclockProgram v-if="state.isOpenProgram === 'OclockApp'" />
+    <MyPhoneProgram v-if="state.isOpenProgram === 'Phone'"></MyPhoneProgram>
   </div>
 </template>
 
@@ -16,11 +17,12 @@ import MyMapProgram from "./Apps/Programs/MyMapProgram.vue";
 import MyPinPongProgram from "./Apps/Programs/MyPinPongProgram.vue";
 import MyWeatherProgram from "./Apps/Programs/MyWeatherProgram.vue";
 import MyOclockProgram from "./Apps/Programs/MyOclockProgram.vue";
+import MyPhoneProgram from "./Apps/Programs/MyPhoneProgram.vue";
 
 
 export default {
   inject: ["state"],
-  components: { MyCameraProgram, MyMapProgram, MyCalculatorProgram, MyWeatherProgram, MyPinPongProgram, MyOclockProgram },
+  components: { MyCameraProgram, MyMapProgram, MyCalculatorProgram, MyWeatherProgram, MyPinPongProgram, MyOclockProgram, MyPhoneProgram },
 };
 </script>
 

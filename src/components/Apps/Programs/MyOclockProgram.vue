@@ -1,16 +1,16 @@
 <template>
-  <div class="oclock__program">
-    <div v-if="currentMenu === 'WorldClock'" class="world__oclock">
+  <div class="oclock__programs">
+    <div v-if="currentMenu === 'WorldClock'" class="oclock__program">
       <MyOclockOclockProgram/>
     </div>
-    <div v-else-if="currentMenu === 'Alarms'" class="world__oclock">
+    <div v-else-if="currentMenu === 'Alarms'" class="oclock__program">
       <!-- <MyOclockControl class="oclock__program-control" /> -->
       <MyOclockAlarmsProgram/>
     </div>
-    <div v-else-if="currentMenu === 'Stopwatch'" class="world__oclock">
+    <div v-else-if="currentMenu === 'Stopwatch'" class="oclock__program">
       <MyOclockStopwatchProgram/>
     </div>
-    <div v-else-if="currentMenu === 'Timers'" class="world__oclock">
+    <div v-else-if="currentMenu === 'Timers'" class="oclock__program">
       <MyOclockTimersProgram/>
     </div>
     <MyOclockMenu class="oclock__program-menu" :isOpenMenu="currentMenu" @updateMenu="updateCurrentMenu"/>
@@ -28,7 +28,7 @@ export default {
   components: { MyOclockMenu, MyOclockAlarmsProgram, MyOclockOclockProgram, MyOclockStopwatchProgram, MyOclockTimersProgram },
   data() {
     return {
-      currentMenu: "Alarms"
+      currentMenu: "WorldClock"
     }
   },
   methods: {
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-.oclock__program {
+.oclock__programs {
   width: 335px;
   height: 705px;
   padding: 50px 10px 15px;
@@ -54,7 +54,7 @@ export default {
   bottom: 20px;
 }
 
-.world__oclock {
+.oclock__program {
   height: 550px;
   /* overflow: hidden; */
 }

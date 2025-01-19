@@ -2446,7 +2446,7 @@ export default {
       isStart: false,
       isLoads: true, //false
       state: reactive({
-        isOpenProgram: "OclockApp", // реактивний об’єкт для передачі в provide
+        isOpenProgram: "", // реактивний об’єкт для передачі в provide
       }),
       isLoading: 0,
     };
